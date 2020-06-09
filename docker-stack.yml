@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+  haproxy:
+    container_name: "swarm-haproxy"
+    build: ./haproxy
+    restart: 'unless-stopped'
+    ports:
+      - $HAPROXY_PORT:80
+    network:
+     - stellot-overlay
+     - vapetool-overlay
+
+networks:
+  stellot-overlay:
+      external: true
+      name: stellot-overlay
+  vapetool-overlay:
+      external: true
+      name: vapetool-overlay
+
+volumes:
+  mongo-data-dev
